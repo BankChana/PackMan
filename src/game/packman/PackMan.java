@@ -30,7 +30,7 @@ public class PackMan extends Game {
 		drawer = new SpriteSheet("images/packman_sheet.png", "images/packman_sheet.info");
 		ghostsCoach = new GhostsCoach();
 		
-		title = "PackMan";
+		title = "PacCPE";
 		width = data.getWidth();
 		height = data.getHeight()+50;
 		delay = 10;
@@ -45,10 +45,12 @@ public class PackMan extends Game {
 	}
 	@Override
 	public void update() {
-		frame++;
-		data.movePackMan(reqDir);
-		data.moveGhosts(ghostsCoach.decide(data));
-		data.update();
+		if(!data.dead) {
+			frame++;
+			data.movePackMan(reqDir);
+			data.moveGhosts(ghostsCoach.decide(data));
+			data.update();
+		}
 	}
 
 	@Override
@@ -60,30 +62,36 @@ public class PackMan extends Game {
 		drawer.draw(g, "mazes", data.mazeNo, 0, 0, false);
 		// draw pills
 		for (Position pill : data.pills) {
-			drawer.draw(g, "pill", 0, pill.column*2, pill.row*2, true);
+			drawer.draw(g, "pill", 0, pill.column * 2, pill.row * 2, true);
 		}
 		// draw powerpills
 		for (Position powerPill : data.powerPills) {
-			drawer.draw(g, "powerpills", 0, powerPill.column*2, powerPill.row*2, true);
+			drawer.draw(g, "powerpills", 0, powerPill.column * 2, powerPill.row * 2, true);
 		}
-		
+
 		// draw pacman
 		MoverInfo packman = data.packman;
-		drawer.draw(g, "packmans", packman.curDir, frame%3, packman.pos.column*2, packman.pos.row*2, true);
-		
+		drawer.draw(g, "packmans", packman.curDir, frame % 3, packman.pos.column * 2, packman.pos.row * 2, true);
+
 		// draw ghosts
-		for (int i=0; i<data.ghostInfos.length; i++) {
+		for (int i = 0; i < data.ghostInfos.length; i++) {
 			GhostInfo ginfo = data.ghostInfos[i];
 			// draw ghost i
-			drawer.draw(g, "ghosts", i, ginfo.curDir+frame%2, ginfo.pos.column*2, ginfo.pos.row*2, true);
+			drawer.draw(g, "ghosts", i, ginfo.curDir + frame % 2, ginfo.pos.column * 2, ginfo.pos.row * 2, true);
 		}
-		
+
 		// draw scores
 		drawer.draw(g, "score", 0, 10, 510, false);
-		String score = ""+data.score;
-		for (int i=0; i<score.length(); i++) {
-			char c = score.charAt(score.length()-1-i);
-			drawer.draw(g, "digits", c-'0', width-i*20-20, 510, false);
+		String score = "" + data.score;
+		for (int i = 0; i < score.length(); i++) {
+			char c = score.charAt(score.length() - 1 - i);
+			drawer.draw(g, "digits", c - '0', width - i * 20 - 20, 510, false);
+		}
+
+		if (data.dead) {
+			g.setColor(new Color(100, 100, 100, 200));
+			g.fillRect(0,0,width,height);
+			drawer.draw(g,"OVER",0,width/2, height/2-50,true);
 		}
 	}
 }
