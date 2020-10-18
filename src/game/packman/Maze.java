@@ -14,7 +14,9 @@ public class Maze {
 	int width, height;
 	public Position packmanPos;
 	public Position ghostPos;
-	public ArrayList<Position> pills, powerPills; 
+	public ArrayList<Position> pills, powerPills;
+
+
 	
 	public Maze(int m) {
 		// load the lines
@@ -23,6 +25,7 @@ public class Maze {
 			powerPills = new ArrayList<Position>();
 			lines = new ArrayList<String>();
 			Scanner s = new Scanner(new File("mazes/"+m));
+
 			int r = 0;
 			while (s.hasNextLine()) {
 				String line = s.nextLine();
@@ -53,6 +56,7 @@ public class Maze {
 		} catch (FileNotFoundException e1) {
 			e1.printStackTrace();
 		}
+
 	}
 
 	public char charAt(int r, int c) {
@@ -63,8 +67,8 @@ public class Maze {
 		char[][] cells = new char[rows][columns];
 		for (int r=0; r<rows; r++) {
 			System.arraycopy(lines.get(r).toCharArray(), 0, cells[r], 0, columns);
-//			for (int c=0; c<columns; c++) {
-//			}
+		//	for (int c=0; c<columns; c++) {
+		//	}
 		}
 		return cells;
 	}
