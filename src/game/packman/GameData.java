@@ -44,7 +44,7 @@ public class GameData {
 		
 	}
 	
-	final int LEFT=0, UP=1, RIGHT=2, DOWN=4;
+	final int LEFT=0, UP=1, RIGHT=2, DOWN=3;
 	
 	private boolean move(int reqDir, MoverInfo info) {
 		// current position of packman is (row, column)
@@ -102,7 +102,7 @@ public class GameData {
 
 
 	public List<Integer> getPossibleDirs(Position pos) {
-		/*List<Integer> list =new ArrayList<Integer>();
+		List<Integer> list =new ArrayList<Integer>();
 		for(int d=0 ;d<4;d++){
 			Position npos = getNextPositionInDir(pos,d);
 			if(mazes[mazeNo].charAt(npos.row,npos.column)!='0'){
@@ -110,13 +110,17 @@ public class GameData {
 			}
 			
 
-		}*/
-		return null;
+		}
+		return list;
 	}
 
-	/*private Position getNextPositionInDir(Position pos, int d) {
-		int nrow = wrap(pos.row,d.mazes[mazeNo].rows);
-		int ncol = wrap(pos.row,d.mazes[mazeNo].colums);
+	private Position getNextPositionInDir(Position pos, int d) {
+		int nrow = wrap(pos.row,d,mazes[mazeNo].rows);
+		int ncol = wrap(pos.row,d,mazes[mazeNo].columns);
 		return new Position(nrow,ncol);
-	}*/
+	}
+
+	private int wrap(int value, int incre, int max) {
+		return (value+max+incre)%max;
+	}
 }
