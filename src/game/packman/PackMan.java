@@ -48,7 +48,9 @@ public class PackMan extends Game {
 		if(!data.dead) {
 			frame++;
 			data.movePackMan(reqDir);
-			data.moveGhosts(ghostsCoach.decide(data));
+			if(frame%2 == 0) {
+				data.moveGhosts(ghostsCoach.decide(data));
+			}
 			data.update();
 		}
 	}
@@ -77,7 +79,11 @@ public class PackMan extends Game {
 		for (int i = 0; i < data.ghostInfos.length; i++) {
 			GhostInfo ginfo = data.ghostInfos[i];
 			// draw ghost i
-			drawer.draw(g, "ghosts", i, ginfo.curDir + frame % 2, ginfo.pos.column * 2, ginfo.pos.row * 2, true);
+			if(ginfo.edibleCountDown == 0) {
+				drawer.draw(g, "ghosts", i, ginfo.curDir + frame % 2, ginfo.pos.column * 2, ginfo.pos.row * 2, true);
+			}else {
+				drawer.draw(g, "edibleghosts",  frame % 2, ginfo.pos.column * 2,ginfo.pos.row * 2, true);
+			}
 		}
 
 		// draw scores

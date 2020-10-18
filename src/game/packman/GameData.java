@@ -75,6 +75,26 @@ public class GameData {
 		}else if(powerPills.contains(packman.pos)){
 			powerPills.remove(packman.pos);
 			score += 100;
+			for (GhostInfo g:ghostInfos){
+				g.edibleCountDown=500;
+			}
+		}
+		for (GhostInfo g:ghostInfos){
+			if(g.edibleCountDown >0){
+				if(touching(g.pos,packman.pos)){
+					//eat
+					score += 100;
+					g.curDir = g.reqDir = MoverInfo.LEFT;
+					g.pos.row = mazes[mazeNo].ghostPos.row;
+					g.pos.column = mazes[mazeNo].ghostPos.column;
+					g.edibleCountDown = 0;
+				}
+				g.edibleCountDown--;
+			}else {
+				if(touching(g.pos,packman.pos)){
+					dead = true ;
+				}
+			}
 		}
 
 		if(pills.isEmpty()&& powerPills.isEmpty()){ // if clear next maze
@@ -85,10 +105,15 @@ public class GameData {
 		}
 		
 	}
-	public void moveGhosts(int[] decide) {
-		/*for (GhostInfo info:ghostInfos){
+
+	private boolean touching(Position a, Position b) {
+		return Math.abs(a.row-b.row)+Math.abs(a.column-b.column) <3 ;
+	}
+
+	public void moveGhosts(int[] reqDirs) {
+
 		for (int i=0;i<4 ;i++){
-			GhostInfo info:ghostInfos[i];
+			GhostInfo info = ghostInfos[i];
 			info.reqDir = reqDirs[i];
 			if(move(info.reqDir,info)){
 				info.curDir = info.reqDir;
@@ -97,7 +122,6 @@ public class GameData {
 			}
 		}
 
-		 */
 	}
 	public int getWidth() {
 		return mazes[mazeNo].width;
@@ -105,4 +129,23 @@ public class GameData {
 	public int getHeight() {
 		return mazes[mazeNo].height;
 	}
+
+	public List<Integer> getPossibleDirs(Position pos){
+		List<Integer> list = new ArrayList<Integer>();
+		for (int d=0;d<4;d++) {
+			Position npos = getNextPositoinInDir(pos, d);
+			if (mazes[mazeNo].charAt(npos.row, npos.column) != '0') {
+				list.add(d);
+			}
+
+		}
+		return list ;
+	}
+
+	public Position getNextPositoinInDir(Position pos,int d){
+		int nrow = wrap(pos.row, MoverInfo.DROW[d],mazes[mazeNo].rows);
+		int ncol = wrap(pos.column,MoverInfo.DCOL[d],mazes[mazeNo].columns);
+		return  new Position(nrow,ncol);
+	}
+
 }
