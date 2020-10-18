@@ -1,4 +1,4 @@
-package game.packman;
+package game.PacCPE;
 
 public class MoverInfo {
 

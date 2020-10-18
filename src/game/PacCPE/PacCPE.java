@@ -1,4 +1,4 @@
-package game.packman;
+package game.PacCPE;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -25,7 +25,7 @@ public class PacCPE extends Game {
 		ghostsCoach = new GhostsCoach();
 
 		title = "PacCPE";
-		width = data.getWidth();
+		width = data.getWidth()+15;
 		height = data.getHeight()+50;
 		delay = 10;
 	}
@@ -85,13 +85,13 @@ public class PacCPE extends Game {
 		String score = "" + data.score;
 		for (int i = 0; i < score.length(); i++) {
 			char c = score.charAt(score.length() - 1 - i);
-			drawer.draw(g, "digits", c - '0', width - i * 20 - 20, 510, false);
+			drawer.draw(g, "digits", c - '0', width - i * 20 - 40, 510, false);
 		}
-
+		// draw game over
 		if (data.dead) {
 			g.setColor(new Color(100, 100, 100, 200));
 			g.fillRect(0,0,width,height);
-			drawer.draw(g,"OVER",0,width/2, height/2-50,true);
+			drawer.draw(g,"over",0,width/2, height/2-50,true);
 		}
 	}
 }

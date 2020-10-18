@@ -1,10 +1,8 @@
-package game.packman;
+package game.PacCPE;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-
-import static game.packman.MoverInfo.*;
 
 
 public class GameData {

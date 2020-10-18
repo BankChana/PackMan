@@ -1,4 +1,4 @@
-package game.packman;
+package game.PacCPE;
 import java.util.List;
 import java.util.Random;
 public class GhostsCoach {
