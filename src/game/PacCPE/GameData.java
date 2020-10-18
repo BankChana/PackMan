@@ -23,7 +23,6 @@ public class GameData {
 		for (int m=0; m<4; m++) {
 			mazes[m] = new Maze(m);
 		}
-//		mazeNo = 0;
 		setMaze(mazeNo);
 	}
 
@@ -80,7 +79,7 @@ public class GameData {
 		for (GhostInfo g:ghostInfos){
 			if(g.edibleCountDown >0){
 				if(touching(g.pos,paccpe.pos)){
-					//eat
+					//eat pill
 					score += 100;
 					g.curDir = g.reqDir = MoverInfo.LEFT;
 					g.pos.row = mazes[mazeNo].ghostPos.row;

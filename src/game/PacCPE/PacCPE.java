@@ -18,6 +18,7 @@ public class PacCPE extends Game {
 	GameData data;
 	SpriteSheet drawer;
 	GhostsCoach ghostsCoach;
+	public int speedGhosts = 3 ;
 
 	public PacCPE() {
 		data = new GameData();
@@ -27,7 +28,7 @@ public class PacCPE extends Game {
 		title = "PacCPE";
 		width = data.getWidth()+15;
 		height = data.getHeight()+50;
-		delay = 10;
+		delay = 10; // game speed
 	}
 
 	@Override
@@ -38,11 +39,11 @@ public class PacCPE extends Game {
 		}
 	}
 	@Override
-	public void update() {
+	public void update() {// update Ghosts and speed frame
 		if(!data.dead) {
 			frame++;
 			data.movePackMan(reqDir);
-			if(frame%2 == 0) {
+			if(frame%speedGhosts == 0) {
 				data.moveGhosts(ghostsCoach.decide(data));
 			}
 			data.update();
@@ -67,14 +68,14 @@ public class PacCPE extends Game {
 
 		// draw pacman
 		MoverInfo packman = data.paccpe;
-		drawer.draw(g, "packmans", packman.curDir, frame % 3, packman.pos.column * 2, packman.pos.row * 2, true);
+		drawer.draw(g, "packmans", packman.curDir, frame % 2, packman.pos.column * 2, packman.pos.row * 2, true);
 
 		// draw ghosts
 		for (int i = 0; i < data.ghostInfos.length; i++) {
 			GhostInfo ginfo = data.ghostInfos[i];
 			// draw ghost i
 			if(ginfo.edibleCountDown == 0) {
-				drawer.draw(g, "ghosts", i, ginfo.curDir + frame % 2, ginfo.pos.column * 2, ginfo.pos.row * 2, true);
+				drawer.draw(g, "ghosts", i, ginfo.curDir + frame % 1, ginfo.pos.column * 2, ginfo.pos.row * 2, true);
 			}else {
 				drawer.draw(g, "edibleghosts",  frame % 2, ginfo.pos.column * 2,ginfo.pos.row * 2, true);
 			}
@@ -86,12 +87,16 @@ public class PacCPE extends Game {
 		for (int i = 0; i < score.length(); i++) {
 			char c = score.charAt(score.length() - 1 - i);
 			drawer.draw(g, "digits", c - '0', width - i * 20 - 40, 510, false);
-		}
+
 		// draw game over
 		if (data.dead) {
 			g.setColor(new Color(100, 100, 100, 200));
 			g.fillRect(0,0,width,height);
 			drawer.draw(g,"over",0,width/2, height/2-50,true);
+			//drawer.draw(g, "digits",  c - '0', width/2 , height/2+10, true);
+			break;
 		}
+	}
+
 	}
 }

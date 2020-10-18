@@ -8,8 +8,7 @@ import java.util.Scanner;
 public class Maze {
 
 	ArrayList<String> lines;
-//	int row, column;
-	int rows, columns; 
+	int rows, columns;
 	int width, height;
 	public Position packmanPos;
 	public Position ghostPos;
@@ -66,8 +65,7 @@ public class Maze {
 		char[][] cells = new char[rows][columns];
 		for (int r=0; r<rows; r++) {
 			System.arraycopy(lines.get(r).toCharArray(), 0, cells[r], 0, columns);
-		//	for (int c=0; c<columns; c++) {
-		//	}
+
 		}
 		return cells;
 	}
