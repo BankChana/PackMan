@@ -3,19 +3,19 @@ package game.packman;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-//import java.awt.image.BufferedImage;
-//import java.io.File;
-//import java.io.IOException;
-//import java.util.ArrayList;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
 
-//import javax.imageio.ImageIO;
+import javax.imageio.ImageIO;
 
 import org.game.engine.Game;
 import org.game.engine.GameApplication;
 import org.game.engine.SpriteSheet;
 
 public class PackMan extends Game {
-	
+
 	public static void main(String[] args) {
 		GameApplication.start(new PackMan());
 	}
@@ -24,18 +24,18 @@ public class PackMan extends Game {
 	GameData data;
 	SpriteSheet drawer;
 	GhostsCoach ghostsCoach;
-	
+
 	public PackMan() {
 		data = new GameData();
 		drawer = new SpriteSheet("images/packman_sheet.png", "images/packman_sheet.info");
 		ghostsCoach = new GhostsCoach();
-		
+
 		title = "PacCPE";
 		width = data.getWidth();
 		height = data.getHeight()+50;
 		delay = 10;
 	}
-	
+
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
