@@ -3,21 +3,15 @@ package game.packman;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
-
-import javax.imageio.ImageIO;
 
 import org.game.engine.Game;
 import org.game.engine.GameApplication;
 import org.game.engine.SpriteSheet;
 
-public class PackMan extends Game {
+public class PacCPE extends Game {
 
 	public static void main(String[] args) {
-		GameApplication.start(new PackMan());
+		GameApplication.start(new PacCPE());
 	}
 
 	int reqDir, frame;
@@ -25,7 +19,7 @@ public class PackMan extends Game {
 	SpriteSheet drawer;
 	GhostsCoach ghostsCoach;
 
-	public PackMan() {
+	public PacCPE() {
 		data = new GameData();
 		drawer = new SpriteSheet("images/packman_sheet.png", "images/packman_sheet.info");
 		ghostsCoach = new GhostsCoach();
@@ -72,7 +66,7 @@ public class PackMan extends Game {
 		}
 
 		// draw pacman
-		MoverInfo packman = data.packman;
+		MoverInfo packman = data.paccpe;
 		drawer.draw(g, "packmans", packman.curDir, frame % 3, packman.pos.column * 2, packman.pos.row * 2, true);
 
 		// draw ghosts

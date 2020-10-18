@@ -12,7 +12,7 @@ public class GameData {
 	int mazeNo;
 	CopyOnWriteArrayList<Position> pills;
 	CopyOnWriteArrayList<Position> powerPills;
-	public MoverInfo packman;
+	public MoverInfo paccpe;
 	public GhostInfo[] ghostInfos = new GhostInfo[4];
 	public int score;
 
@@ -30,7 +30,7 @@ public class GameData {
 	}
 
 	private void setMaze(int m) {
-		packman = new MoverInfo(mazes[m].packmanPos);
+		paccpe = new MoverInfo(mazes[m].packmanPos);
 		for (int g=0; g<4; g++) {
 			ghostInfos[g] = new GhostInfo(mazes[m].ghostPos);
 		}
@@ -39,10 +39,10 @@ public class GameData {
 	}
 
 	public void movePackMan(int reqDir) {
-		if (move(reqDir, packman)) {
-			packman.curDir = reqDir;
+		if (move(reqDir, paccpe)) {
+			paccpe.curDir = reqDir;
 		} else {
-			move(packman.curDir, packman);
+			move(paccpe.curDir, paccpe);
 		}
 
 	}
@@ -69,11 +69,11 @@ public class GameData {
 
 	}
 	public void update() {// eat Dot
-		if(pills.contains(packman.pos)){
-			pills.remove(packman.pos);
+		if(pills.contains(paccpe.pos)){
+			pills.remove(paccpe.pos);
 			score += 5;
-		}else if(powerPills.contains(packman.pos)){
-			powerPills.remove(packman.pos);
+		}else if(powerPills.contains(paccpe.pos)){
+			powerPills.remove(paccpe.pos);
 			score += 100;
 			for (GhostInfo g:ghostInfos){
 				g.edibleCountDown=500;
@@ -81,7 +81,7 @@ public class GameData {
 		}
 		for (GhostInfo g:ghostInfos){
 			if(g.edibleCountDown >0){
-				if(touching(g.pos,packman.pos)){
+				if(touching(g.pos,paccpe.pos)){
 					//eat
 					score += 100;
 					g.curDir = g.reqDir = MoverInfo.LEFT;
@@ -91,7 +91,7 @@ public class GameData {
 				}
 				g.edibleCountDown--;
 			}else {
-				if(touching(g.pos,packman.pos)){
+				if(touching(g.pos,paccpe.pos)){
 					dead = true ;
 				}
 			}
