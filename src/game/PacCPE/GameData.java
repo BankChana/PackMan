@@ -13,6 +13,7 @@ public class GameData {
 	public MoverInfo paccpe;
 	public GhostInfo[] ghostInfos = new GhostInfo[4];
 	public int score;
+	int speedGhost = 3 ;
 
 	Maze[] mazes;
 	boolean dead = false;
@@ -50,7 +51,7 @@ public class GameData {
 	}
 
 	private boolean move(int reqDir, MoverInfo info) {
-		// current position of packman is (row, column)
+		// current position of pacman is (row, column)
 		int row = info.pos.row;
 		int column = info.pos.column;
 		int rows = mazes[mazeNo].rows;
@@ -72,16 +73,24 @@ public class GameData {
 		}else if(powerPills.contains(paccpe.pos)){
 			powerPills.remove(paccpe.pos);
 			score += 100;
+			if (mazeNo == 0){
 			for (GhostInfo g:ghostInfos){
 				g.edibleCountDown=500;
+				}
+			}
+			if(mazeNo == 1){
+				for (GhostInfo g:ghostInfos){
+					g.freezeGhost=500;
+				}
 			}
 		}
 		for (GhostInfo g:ghostInfos){
+			if(mazeNo == 0){
 			if(g.edibleCountDown >0){
 				if(touching(g.pos,paccpe.pos)){
-					//eat pill
+					//eat power pills
 					score += 100;
-					g.curDir = g.reqDir = MoverInfo.LEFT;
+					g.curDir = g.reqDir = MoverInfo.UP;
 					g.pos.row = mazes[mazeNo].ghostPos.row;
 					g.pos.column = mazes[mazeNo].ghostPos.column;
 					g.edibleCountDown = 0;
@@ -90,6 +99,16 @@ public class GameData {
 			}else {
 				if(touching(g.pos,paccpe.pos)){
 					dead = true ;
+					}
+
+				}
+			}
+			if(mazeNo == 1){
+				if(g.freezeGhost >0){
+					speedGhost = 10000;
+					g.freezeGhost--;
+				}else {
+					speedGhost = 3 ;
 				}
 			}
 		}
