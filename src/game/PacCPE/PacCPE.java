@@ -42,7 +42,7 @@ public class PacCPE extends Game {
 		if(!data.dead) {
 			frame++;
 			data.movePackMan(reqDir);
-			if(frame%data.speedGhost == 0) {
+			if(frame%(data.speedGhost/2) == 0) {
 				data.moveGhosts(ghostsCoach.decide(data));
 			}
 			data.update();
@@ -96,7 +96,6 @@ public class PacCPE extends Game {
 			g.setColor(new Color(100, 100, 100, 200));
 			g.fillRect(0,0,width,height);
 			drawer.draw(g,"over",0,width/2, height/2-50,true);
-			//drawer.draw(g, "digits",  c - '0', width/2 , height/2+10, true);
 
 		}
 

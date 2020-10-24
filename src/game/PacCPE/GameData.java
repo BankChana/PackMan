@@ -13,7 +13,7 @@ public class GameData {
 	public MoverInfo paccpe;
 	public GhostInfo[] ghostInfos = new GhostInfo[4];
 	public int score;
-	int speedGhost = 3 ;
+	int speedGhost = 7 ;
 
 	Maze[] mazes;
 	boolean dead = false;
@@ -75,12 +75,12 @@ public class GameData {
 			score += 100;
 			if (mazeNo == 0){
 			for (GhostInfo g:ghostInfos){
-				g.edibleCountDown=500;
+				g.edibleCountDown=400;
 				}
 			}
 			if(mazeNo == 1){
 				for (GhostInfo g:ghostInfos){
-					g.freezeGhost=500;
+					g.freezeGhost=400;
 				}
 			}
 		}
@@ -97,9 +97,7 @@ public class GameData {
 				}
 				g.edibleCountDown--;
 			}else {
-				if(touching(g.pos,paccpe.pos)){
-					dead = true ;
-					}
+				PacDead();
 
 				}
 			}
@@ -108,8 +106,17 @@ public class GameData {
 					speedGhost = 10000;
 					g.freezeGhost--;
 				}else {
-					speedGhost = 3 ;
+					PacDead();
+					speedGhost = 6 ;
 				}
+			}
+			if(mazeNo == 2){
+				PacDead();
+				speedGhost = 5 ;
+			}
+			if(mazeNo == 3){
+				PacDead();
+				speedGhost = 4 ;
 			}
 		}
 
@@ -153,7 +160,6 @@ public class GameData {
 			if (mazes[mazeNo].charAt(npos.row, npos.column) != '0') {
 				list.add(d);
 			}
-
 		}
 		return list ;
 	}
@@ -162,6 +168,14 @@ public class GameData {
 		int nrow = wrap(pos.row, MoverInfo.DROW[d],mazes[mazeNo].rows);
 		int ncol = wrap(pos.column,MoverInfo.DCOL[d],mazes[mazeNo].columns);
 		return  new Position(nrow,ncol);
+	}
+
+	public void PacDead() {
+		for(GhostInfo g:ghostInfos) {
+			if (touching(g.pos, paccpe.pos)) {
+				dead = true;
+			}
+		}
 	}
 
 }
