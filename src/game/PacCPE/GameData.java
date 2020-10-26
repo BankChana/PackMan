@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-
 public class GameData {
 
 	int mazeNo;
@@ -14,7 +13,7 @@ public class GameData {
 	public GhostInfo[] ghostInfos = new GhostInfo[4];
 	public int score;
 	int speedGhost = 7 ;
-
+	int delay = 10 ; // game speed
 	Maze[] mazes;
 	boolean dead = false;
 
@@ -67,6 +66,11 @@ public class GameData {
 
 	}
 	public void update() {// eat Dot
+		//System.out.println(paccpe.pos.row);
+		//System.out.println(paccpe.pos.column);
+		//System.out.println(ghostInfos[1].pos);
+		//System.out.println(ghostInfos[2].pos);
+		//System.out.println(ghostInfos[3].pos);
 		if(pills.contains(paccpe.pos)){
 			pills.remove(paccpe.pos);
 			score += 5;
@@ -75,12 +79,22 @@ public class GameData {
 			score += 100;
 			if (mazeNo == 0){
 			for (GhostInfo g:ghostInfos){
-				g.edibleCountDown=400;
+					g.edibleCountDown=500;
 				}
 			}
 			if(mazeNo == 1){
 				for (GhostInfo g:ghostInfos){
 					g.freezeGhost=400;
+				}
+			}
+			if(mazeNo == 2){
+				for(GhostInfo g:ghostInfos){
+					g.slowGhost=400;
+				}
+			}
+			if(mazeNo == 3){
+				for(GhostInfo g:ghostInfos){
+					g.speedPacman =400;
 				}
 			}
 		}
@@ -111,12 +125,21 @@ public class GameData {
 				}
 			}
 			if(mazeNo == 2){
-				PacDead();
-				speedGhost = 5 ;
+				if(g.slowGhost > 0){
+					speedGhost = 8;
+					PacDead();
+				}else {
+					PacDead();
+					speedGhost = 5;
+				}
 			}
 			if(mazeNo == 3){
-				PacDead();
-				speedGhost = 4 ;
+				if(g.speedPacman > 0){
+
+				}else{
+					PacDead();
+					speedGhost = 4 ;
+				}
 			}
 		}
 

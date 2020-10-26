@@ -23,11 +23,10 @@ public class PacCPE extends Game {
 		data = new GameData();
 		drawer = new SpriteSheet("images/packman_sheet.png", "images/packman_sheet.info");
 		ghostsCoach = new GhostsCoach();
-
 		title = "PacCPE";
 		width = data.getWidth()+16;
 		height = data.getHeight()+50;
-		delay = 10; // game speed
+		delay = data.delay ;
 	}
 
 	@Override
@@ -64,11 +63,9 @@ public class PacCPE extends Game {
 		for (Position powerPill : data.powerPills) {
 			drawer.draw(g, "powerpills", 0, powerPill.column * 2, powerPill.row * 2, true);
 		}
-
 		// draw pacman
 		MoverInfo packman = data.paccpe;
 		drawer.draw(g, "packmans", packman.curDir, frame % 2, packman.pos.column * 2, packman.pos.row * 2, true);
-
 		// draw ghosts
 		for (int i = 0; i < data.ghostInfos.length; i++) {
 			GhostInfo ginfo = data.ghostInfos[i];
@@ -80,10 +77,13 @@ public class PacCPE extends Game {
 			if(ginfo.freezeGhost != 0){
 				drawer.draw(g,"edibleghosts",frame % 1,ginfo.pos.column * 2,ginfo.pos.row * 2,true);
 			}
-
-
+			if(ginfo.slowGhost != 0){
+				drawer.draw(g,"edibleghosts",frame % 1,ginfo.pos.column*2,ginfo.pos.row * 2,true);
+			}
+			if(ginfo.speedPacman != 0){
+				drawer.draw(g, "edibleghosts",  frame % 2, ginfo.pos.column * 2,ginfo.pos.row * 2, true);
+			}
 		}
-
 		// draw scores
 		drawer.draw(g, "score", 0, 10, 510, false);
 		String score = "" + data.score;
@@ -96,9 +96,6 @@ public class PacCPE extends Game {
 			g.setColor(new Color(100, 100, 100, 200));
 			g.fillRect(0,0,width,height);
 			drawer.draw(g,"over",0,width/2, height/2-50,true);
-
 		}
-
-
 	}
 }
