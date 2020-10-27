@@ -12,11 +12,10 @@ public class GhostsCoach {
 			List<Integer> list = data.getPossibleDirs(data.ghostInfos[i].pos);
 			list.remove(Integer.valueOf(MoverInfo.REV[data.ghostInfos[i].curDir]));
 			dirs[i] = list.get(random.nextInt(list.size()));
-
 		}
 		return dirs;
-		}
-
 	}
+
+}
 	
 

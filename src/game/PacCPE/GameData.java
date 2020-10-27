@@ -12,10 +12,11 @@ public class GameData {
 	public MoverInfo paccpe;
 	public GhostInfo[] ghostInfos = new GhostInfo[4];
 	public int score;
-	int speedGhost = 7 ;
+	int speedGhost = 6 ;
 	int delay = 10 ; // game speed
 	Maze[] mazes;
 	boolean dead = false;
+	boolean win = false ;
 
 	public GameData() {
 		mazes = new Maze[4];
@@ -66,9 +67,9 @@ public class GameData {
 
 	}
 	public void update() {// eat Dot
-		//System.out.println(paccpe.pos.row);
-		//System.out.println(paccpe.pos.column);
-		//System.out.println(ghostInfos[1].pos);
+		//System.out.println(ghostInfos[0].reqDir+" "+ghostInfos[0].curDir);
+		//System.out.println(paccpe.pos.row+" "+paccpe.pos.column);
+		//System.out.println(ghostInfos[1].pos.row +" "+ghostInfos[1].pos.column);
 		//System.out.println(ghostInfos[2].pos);
 		//System.out.println(ghostInfos[3].pos);
 		if(pills.contains(paccpe.pos)){
@@ -98,47 +99,56 @@ public class GameData {
 				}
 			}
 		}
-		for (GhostInfo g:ghostInfos){
-			if(mazeNo == 0){
-			if(g.edibleCountDown >0){
-				if(touching(g.pos,paccpe.pos)){
-					//eat power pills
-					score += 100;
-					g.curDir = g.reqDir = MoverInfo.UP;
-					g.pos.row = mazes[mazeNo].ghostPos.row;
-					g.pos.column = mazes[mazeNo].ghostPos.column;
-					g.edibleCountDown = 0;
-				}
-				g.edibleCountDown--;
-			}else {
-				PacDead();
-
+		for (GhostInfo g:ghostInfos) {
+			if (mazeNo == 0) {
+				if (g.edibleCountDown > 0) {
+					if (touching(g.pos, paccpe.pos)) {
+						//eat power pills
+						score += 100;
+						g.curDir = g.reqDir = MoverInfo.UP;
+						g.pos.row = mazes[mazeNo].ghostPos.row;
+						g.pos.column = mazes[mazeNo].ghostPos.column;
+					}
+					g.edibleCountDown--;
+				} else {
+					//PacDead();
 				}
 			}
-			if(mazeNo == 1){
-				if(g.freezeGhost >0){
+			if (mazeNo == 1) {
+				if (g.freezeGhost > 0) {
 					speedGhost = 10000;
 					g.freezeGhost--;
-				}else {
-					PacDead();
-					speedGhost = 6 ;
-				}
-			}
-			if(mazeNo == 2){
-				if(g.slowGhost > 0){
-					speedGhost = 8;
-					PacDead();
-				}else {
-					PacDead();
+				} else {
+					//PacDead();
 					speedGhost = 5;
 				}
 			}
-			if(mazeNo == 3){
-				if(g.speedPacman > 0){
-
-				}else{
-					PacDead();
-					speedGhost = 4 ;
+			if (mazeNo == 2) {
+				if (g.slowGhost > 0) {
+					speedGhost = 20;
+					g.slowGhost--;
+					//PacDead();
+				} else {
+					//PacDead();
+					speedGhost = 4;
+				}
+			}
+			if (mazeNo == 3) {
+				if (g.speedPacman > 300) {
+					speedGhost = 8;
+					g.speedPacman--;
+				} else if (g.speedPacman > 200) {
+					speedGhost = 7;
+					g.speedPacman--;
+				} else if (g.speedPacman > 100) {
+					speedGhost = 6;
+					g.speedPacman--;
+				} else if (g.speedPacman > 0) {
+					speedGhost = 5;
+					g.speedPacman--;
+				} else {
+					//PacDead();
+					speedGhost = 4;
 				}
 			}
 		}
@@ -147,7 +157,10 @@ public class GameData {
 			mazeNo++;
 			if(mazeNo<4){
 				setMaze(mazeNo);
-			}else {dead = true;}
+			}else {
+				setMaze(0);
+				win = true ;
+			}
 		}
 
 	}
@@ -200,5 +213,4 @@ public class GameData {
 			}
 		}
 	}
-
 }
