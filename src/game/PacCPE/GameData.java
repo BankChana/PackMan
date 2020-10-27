@@ -19,9 +19,9 @@ public class GameData {
 	boolean win = false ;
 
 	public GameData() {
-		mazes = new Maze[4];
+		mazes = new Maze[5];
 		// load mazes information
-		for (int m=0; m<4; m++) {
+		for (int m=0; m<5; m++) {
 			mazes[m] = new Maze(m);
 		}
 		setMaze(mazeNo);
@@ -111,7 +111,7 @@ public class GameData {
 					}
 					g.edibleCountDown--;
 				} else {
-					PacDead();
+					//PacDead();
 				}
 			}
 			if (mazeNo == 1) {
@@ -119,7 +119,7 @@ public class GameData {
 					speedGhost = 10000;
 					g.freezeGhost--;
 				} else {
-					PacDead();
+					//PacDead();
 					speedGhost = 5;
 				}
 			}
@@ -127,9 +127,9 @@ public class GameData {
 				if (g.slowGhost > 0) {
 					speedGhost = 20;
 					g.slowGhost--;
-					PacDead();
+					//PacDead();
 				} else {
-					PacDead();
+					//PacDead();
 					speedGhost = 4;
 				}
 			}
@@ -137,21 +137,21 @@ public class GameData {
 				if (g.speedPacman > 300) {
 					speedGhost = 8;
 					g.speedPacman--;
-					PacDead();
+					//PacDead();
 				} else if (g.speedPacman > 200) {
 					speedGhost = 7;
 					g.speedPacman--;
-					PacDead();
+					//PacDead();
 				} else if (g.speedPacman > 100) {
 					speedGhost = 6;
 					g.speedPacman--;
-					PacDead();
+					//PacDead();
 				} else if (g.speedPacman > 0) {
 					speedGhost = 5;
 					g.speedPacman--;
-					PacDead();
+					//PacDead();
 				} else {
-					PacDead();
+					//PacDead();
 					speedGhost = 4;
 				}
 			}
@@ -159,14 +159,9 @@ public class GameData {
 
 		if(pills.isEmpty()&& powerPills.isEmpty()){ // if clear next maze
 			mazeNo++;
-			if(mazeNo<4){
+			if(mazeNo<5){
 				setMaze(mazeNo);
-				if(mazeNo == 3) {
-					if(pills.isEmpty()&& powerPills.isEmpty()) {
-						setMaze(0);
-						win = true;
-					}
-				}
+
 			}
 		}
 
