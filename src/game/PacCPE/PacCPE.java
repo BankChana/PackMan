@@ -25,7 +25,7 @@ public class PacCPE extends Game {
 		ghostsCoach = new GhostsCoach();
 		title = "PacCPE";
 		width = data.getWidth() + 16;
-		height = data.getHeight() + 50;
+		height = data.getHeight() + 65;
 		delay = data.delay;
 
 	}
@@ -85,11 +85,11 @@ public class PacCPE extends Game {
 			}
 		}
 		// draw scores
-		drawer.draw(g, "score", 0, 10, 510, false);
+		drawer.draw(g, "score", 0, 10, 525, false);
 		String score = "" + data.score;
 		for (int i = 0; i < score.length(); i++) {
 			char c = score.charAt(score.length() - 1 - i);
-			drawer.draw(g, "digits", c - '0', width - i * 20 - 40, 510, false);
+			drawer.draw(g, "digits", c - '0', width - i * 20 - 40, 525, false);
 		}
 		// draw game over
 		if (data.dead) {
@@ -99,6 +99,7 @@ public class PacCPE extends Game {
 		}
 		if (data.win){
 			g.setColor(new Color(200, 200, 200, 200));
+			g.fillRect(0,0,width,height);
 			System.out.println("Win");
 		}
 	}
