@@ -157,9 +157,12 @@ public class GameData {
 			mazeNo++;
 			if(mazeNo<4){
 				setMaze(mazeNo);
-			}else {
-				setMaze(0);
-				win = true ;
+				if(mazeNo == 3) {
+					if(pills.isEmpty()&& powerPills.isEmpty()) {
+						setMaze(0);
+						win = true;
+					}
+				}
 			}
 		}
 
