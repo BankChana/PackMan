@@ -19,9 +19,9 @@ public class GameData {
 	boolean win = false ;
 
 	public GameData() {
-		mazes = new Maze[4];
+		mazes = new Maze[5];
 		// load mazes information
-		for (int m=0; m<4; m++) {
+		for (int m=0; m<5; m++) {
 			mazes[m] = new Maze(m);
 		}
 		setMaze(mazeNo);
@@ -137,15 +137,19 @@ public class GameData {
 				if (g.speedPacman > 300) {
 					speedGhost = 8;
 					g.speedPacman--;
+					//PacDead();
 				} else if (g.speedPacman > 200) {
 					speedGhost = 7;
 					g.speedPacman--;
+					//PacDead();
 				} else if (g.speedPacman > 100) {
 					speedGhost = 6;
 					g.speedPacman--;
+					//PacDead();
 				} else if (g.speedPacman > 0) {
 					speedGhost = 5;
 					g.speedPacman--;
+					//PacDead();
 				} else {
 					//PacDead();
 					speedGhost = 4;
@@ -155,14 +159,9 @@ public class GameData {
 
 		if(pills.isEmpty()&& powerPills.isEmpty()){ // if clear next maze
 			mazeNo++;
-			if(mazeNo<4){
+			if(mazeNo<5){
 				setMaze(mazeNo);
-				if(mazeNo == 3) {
-					if(pills.isEmpty()&& powerPills.isEmpty()) {
-						setMaze(0);
-						win = true;
-					}
-				}
+
 			}
 		}
 

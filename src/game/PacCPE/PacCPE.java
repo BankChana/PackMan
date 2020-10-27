@@ -25,7 +25,7 @@ public class PacCPE extends Game {
 		ghostsCoach = new GhostsCoach();
 		title = "PacCPE";
 		width = data.getWidth() + 16;
-		height = data.getHeight() + 65;
+		height = data.getHeight() + 67;
 		delay = data.delay;
 
 	}
