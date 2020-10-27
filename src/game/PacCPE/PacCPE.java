@@ -24,11 +24,11 @@ public class PacCPE extends Game {
 		drawer = new SpriteSheet("images/packman_sheet.png", "images/packman_sheet.info");
 		ghostsCoach = new GhostsCoach();
 		title = "PacCPE";
-		width = data.getWidth()+16;
-		height = data.getHeight()+50;
-		delay = data.delay ;
-	}
+		width = data.getWidth() + 16;
+		height = data.getHeight() + 50;
+		delay = data.delay;
 
+	}
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int key = e.getKeyCode();
@@ -96,6 +96,10 @@ public class PacCPE extends Game {
 			g.setColor(new Color(100, 100, 100, 200));
 			g.fillRect(0,0,width,height);
 			drawer.draw(g,"over",0,width/2, height/2-50,true);
+		}
+		if (data.win){
+			g.setColor(new Color(200, 200, 200, 200));
+			System.out.println("Win");
 		}
 	}
 }
