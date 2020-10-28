@@ -98,6 +98,11 @@ public class GameData {
 					g.speedPacman =400;
 				}
 			}
+			if(mazeNo == 4){
+				for(GhostInfo g:ghostInfos){
+					g.speedPacman =400;
+				}
+			}
 		}
 		for (GhostInfo g:ghostInfos) {
 			if (mazeNo == 0) {
@@ -134,6 +139,28 @@ public class GameData {
 				}
 			}
 			if (mazeNo == 3) {
+				if (g.speedPacman > 300) {
+					speedGhost = 8;
+					g.speedPacman--;
+					PacDead();
+				} else if (g.speedPacman > 200) {
+					speedGhost = 7;
+					g.speedPacman--;
+					PacDead();
+				} else if (g.speedPacman > 100) {
+					speedGhost = 6;
+					g.speedPacman--;
+					PacDead();
+				} else if (g.speedPacman > 0) {
+					speedGhost = 5;
+					g.speedPacman--;
+					PacDead();
+				} else {
+					PacDead();
+					speedGhost = 4;
+				}
+			}
+			if (mazeNo == 4) {
 				if (g.speedPacman > 300) {
 					speedGhost = 8;
 					g.speedPacman--;
