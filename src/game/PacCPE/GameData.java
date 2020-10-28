@@ -111,7 +111,7 @@ public class GameData {
 					}
 					g.edibleCountDown--;
 				} else {
-					//PacDead();
+					PacDead();
 				}
 			}
 			if (mazeNo == 1) {
@@ -119,7 +119,7 @@ public class GameData {
 					speedGhost = 10000;
 					g.freezeGhost--;
 				} else {
-					//PacDead();
+					PacDead();
 					speedGhost = 5;
 				}
 			}
@@ -127,9 +127,9 @@ public class GameData {
 				if (g.slowGhost > 0) {
 					speedGhost = 20;
 					g.slowGhost--;
-					//PacDead();
+					PacDead();
 				} else {
-					//PacDead();
+					PacDead();
 					speedGhost = 4;
 				}
 			}
@@ -137,21 +137,21 @@ public class GameData {
 				if (g.speedPacman > 300) {
 					speedGhost = 8;
 					g.speedPacman--;
-					//PacDead();
+					PacDead();
 				} else if (g.speedPacman > 200) {
 					speedGhost = 7;
 					g.speedPacman--;
-					//PacDead();
+					PacDead();
 				} else if (g.speedPacman > 100) {
 					speedGhost = 6;
 					g.speedPacman--;
-					//PacDead();
+					PacDead();
 				} else if (g.speedPacman > 0) {
 					speedGhost = 5;
 					g.speedPacman--;
-					//PacDead();
+					PacDead();
 				} else {
-					//PacDead();
+					PacDead();
 					speedGhost = 4;
 				}
 			}
