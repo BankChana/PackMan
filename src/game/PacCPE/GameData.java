@@ -19,9 +19,9 @@ public class GameData {
 	boolean win = false ;
 
 	public GameData() {
-		mazes = new Maze[4];
+		mazes = new Maze[5];
 		// load mazes information
-		for (int m=0; m<4; m++) {
+		for (int m=0; m<5; m++) {
 			mazes[m] = new Maze(m);
 		}
 		setMaze(mazeNo);
@@ -158,10 +158,10 @@ public class GameData {
 		}
 
 		if(pills.isEmpty()&& powerPills.isEmpty()){ // if clear next maze
-			mazeNo++;
-			if(mazeNo<4){
-				setMaze(mazeNo);
 
+			mazeNo++;
+			if(mazeNo<5){
+				setMaze(mazeNo);
 			}
 		}
 

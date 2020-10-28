@@ -22,6 +22,7 @@ public class PacCPE extends Game {
 	public PacCPE() {
 		data = new GameData();
 		drawer = new SpriteSheet("images/packman_sheet.png", "images/packman_sheet.info");
+
 		ghostsCoach = new GhostsCoach();
 		title = "PacCPE";
 		width = data.getWidth() + 16;
